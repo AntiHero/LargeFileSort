@@ -1,0 +1,24 @@
+{
+  "name": "largefilesort",
+  "version": "1.0.0",
+  "description": "Sort large file with limited RAM memory",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AntiHero/LargeFileSort.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AntiHero/LargeFileSort/issues"
+  },
+  "homepage": "https://github.com/AntiHero/LargeFileSort#readme",
+  "devDependencies": {
+    "@types/jest": "^27.0.1",
+    "jest": "^27.1.0"
+  }
+}
