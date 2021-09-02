@@ -26,6 +26,6 @@ describe('file creation', () => {
     const requiredSize = 0.0001;
     await createFileWithRandomNumbers(requiredSize, pathToTestFile);
     const currentSize = await utils.getFileSize(pathToTestFile);
-    expect(Number(utils.toMb(currentSize).toFixed(4))).toBe(requiredSize);
+    expect(Number(utils.toMbs(currentSize).toFixed(4))).toBe(requiredSize);
   });
 });

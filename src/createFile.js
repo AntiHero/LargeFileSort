@@ -8,14 +8,14 @@ const utils = require('./utils');
  * @param {string} path - path to the file
  */
 async function createFileWithRandomNumbers(
-  size = utils.upMb(1),
+  size = utils.toBytes(1),
   path = './files/numbers.txt'
 ) {
   const writeOptions = { encoding: 'utf-8' };
   
   const fileHandler = await fsPromises.open(path, 'a');
   
-  const requiredSize = utils.upMb(size);
+  const requiredSize = utils.toBytes(size);
   let currentSize = await utils.getFileSize(path);
   
   process.stdout.write('Creating file...');
@@ -36,7 +36,7 @@ async function createFileWithRandomNumbers(
 
   await fileHandler.close();
   process.stdout.write(
-    `\nFile created. Size ${utils.toMb(currentSize).toFixed(4)} MBytes.`
+    `\nFile created. Size ${utils.toMbs(currentSize).toFixed(4)} MBytes.`
   );
 }
 

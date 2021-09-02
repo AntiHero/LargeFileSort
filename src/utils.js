@@ -7,11 +7,11 @@ async function getFileSize(path) {
   return size;
 };
 
-function upMb(size) {
+function toBytes(size) {
   return size * constants.KB ** 2;
 };
 
-function toMb(size) {
+function toMbs(size) {
   return size / constants.KB ** 2;
 };
 
@@ -37,6 +37,6 @@ module.exports = {
   getFileSize,
   printProgress,
   removeFileIfExists,
-  toMb,
-  upMb,
+  toMbs,
+  toBytes,
 };
