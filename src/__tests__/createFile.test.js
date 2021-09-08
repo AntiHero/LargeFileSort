@@ -8,7 +8,7 @@ it('should be a function', () => {
 
 const pathToTestFile = './files/test.txt';
 
-describe('file creation', () => {
+describe('check functionality', () => {
   beforeAll(() => {
     utils.removeFileIfExists(pathToTestFile);
   });
