@@ -12,27 +12,34 @@ async function createFileWithRandomNumbers(
   path = './files/numbers.txt'
 ) {
   const writeOptions = { encoding: 'utf-8' };
-  
+
   const fileHandler = await fsPromises.open(path, 'a');
-  
+
   const requiredSize = utils.toBytes(size);
-  let currentSize = await utils.getFileSize(path);
-  
+
+  const existingFileSize = await utils.getFileSize(path);
+  let currentSize = existingFileSize;
+
+  if (currentSize >= requiredSize) return;
+
   process.stdout.write('Creating file...');
+  const numbers = [];
 
-  while (currentSize < requiredSize) {
-    const number = crypto.randomInt(0, 10000);
+  let remainingBytes = requiredSize - existingFileSize;
 
-    await fsPromises.appendFile(
-      fileHandler,
-      String(number) + ' ',
-      writeOptions
-    );
+  for (let i = 0; i < remainingBytes; i++) {
+    const number = crypto.randomInt(0, 247);
+    numbers.push(number);
+    
+    const numberLengthInBytes = number.toString().length;
+    remainingBytes -= numberLengthInBytes;
+    currentSize += numberLengthInBytes + 1;
 
-    currentSize = await utils.getFileSize(path);
-    const progress = utils.calculateProgress(currentSize, requiredSize);
-    utils.printProgress(progress);
+    // const progress = utils.calculateProgress(currentSize, requiredSize);
+    // utils.printProgress(progress); 
   }
+
+  await fsPromises.appendFile(fileHandler, numbers.join('\n'), writeOptions);
 
   await fileHandler.close();
   process.stdout.write(
