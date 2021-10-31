@@ -1,4 +1,5 @@
 const fsPromises = require('fs/promises');
+const readline = require('readline');
 const fs = require('fs');
 const { resolve } = require('path');
 const constants = require('./constants');
@@ -28,7 +29,7 @@ function calculateProgress(currentValue, requiredValue) {
 }
 
 function printProgress(progress) {
-  process.stdout.clearLine();
+  readline.cursorTo(process.stdout, 0);
   process.stdout.cursorTo(0);
   process.stdout.write(
     `Current process is ${progress > 100 ? 100 : progress}% completed.`
