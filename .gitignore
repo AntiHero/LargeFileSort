@@ -1,0 +1,9 @@
+/src/__tests__
+/node_modules
+/output.txt
+/100Mb.txt
+/shell.sh
+__mocks__
+.vscode
+/test
+/tmp
