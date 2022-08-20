@@ -21,6 +21,7 @@ export default async function splitFile(
   filePath: string,
   options: SplitFileOptions = {
     maxRam: 50,
+
     tmpFolder: 'tmp',
   }
 ): Promise<string> {

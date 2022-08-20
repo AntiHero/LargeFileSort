@@ -17,7 +17,7 @@ interface GenerateOptions {
 }
 
 export default async function generateFile(
-  path = "./100Mb.txt",
+  path = "input.txt",
   size = MB_100,
   options: GenerateOptions = {
     min: -100_000,
@@ -28,7 +28,11 @@ export default async function generateFile(
   const pathToFile = resolve(process.cwd(), path);
 
   if (fs.existsSync(pathToFile)) {
-    await truncate(pathToFile, 0);
+    fs.unlink(pathToFile, (err) => {
+      if (err) {
+        throw new Error('Input file can not be deleted!')
+      }
+    })
   }
 
   const ws = fs.createWriteStream(pathToFile, {
