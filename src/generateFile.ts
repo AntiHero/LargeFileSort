@@ -30,9 +30,9 @@ export default async function generateFile(
   if (fs.existsSync(pathToFile)) {
     fs.unlink(pathToFile, (err) => {
       if (err) {
-        throw new Error('Input file can not be deleted!')
+        throw new Error("Input file can not be deleted!");
       }
-    })
+    });
   }
 
   const ws = fs.createWriteStream(pathToFile, {

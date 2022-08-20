@@ -1,15 +1,15 @@
-import colors from 'ansi-colors';
+import colors from "ansi-colors";
 
-import sortFiles from './sortFiles';
-import splitFile from './splitFile';
-import generateFile from './generateFile';
+import sortFiles from "./sortFiles";
+import splitFile from "./splitFile";
+import generateFile from "./generateFile";
 
 const failure = () => {
-  console.log(colors.red('Failure'));
+  console.log(colors.red("Failure"));
   return Promise.reject();
 };
 
-const success = () => console.log(colors.green('Success'));
+const success = () => console.log(colors.green("Success"));
 
 generateFile()
   .then((filePath) => {
@@ -23,5 +23,5 @@ generateFile()
   }, failure)
   .then(sortFiles)
   .then(success, failure)
-  .then(() => console.log(colors.bgMagenta('Job done')))
+  .then(() => console.log(colors.bgMagenta("Job done")))
   .catch((e) => `Finished with ${e}`);

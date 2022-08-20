@@ -1,18 +1,18 @@
-import fs from 'node:fs';
-import { resolve } from 'node:path';
-import fsPromises from 'node:fs/promises';
-import * as readline from 'node:readline';
-import { readdir } from 'node:fs/promises';
+import fs from "node:fs";
+import { resolve } from "node:path";
+import fsPromises from "node:fs/promises";
+import * as readline from "node:readline";
+import { readdir } from "node:fs/promises";
 
-import colors from 'ansi-colors';
-import { SingleBar } from 'cli-progress';
+import colors from "ansi-colors";
+import { SingleBar } from "cli-progress";
 
-import bytesToMb from './utils/bytesToMb';
-import writeToFile from './utils/writeToFile';
+import bytesToMb from "./utils/bytesToMb";
+import writeToFile from "./utils/writeToFile";
 
 export default async function sortFiles(
   folder: string,
-  outputFile = 'output.txt'
+  outputFile = "output.txt"
 ): Promise<void> {
   const generators: AsyncIterableIterator<string>[] = [];
 
@@ -52,14 +52,14 @@ export default async function sortFiles(
     }
   }
 
-  let output = '';
+  let output = "";
   let chunkSize = 0;
 
   const outputFilePath = resolve(process.cwd(), outputFile);
 
   if (fs.existsSync(outputFilePath)) {
     fs.unlink(outputFilePath, (err) => {
-      if (err) throw new Error('Output file can not be deleted');
+      if (err) throw new Error("Output file can not be deleted");
     });
   }
 
@@ -71,9 +71,9 @@ export default async function sortFiles(
   const bar = new SingleBar({
     format: `${colors.yellow(
       `Sorting files (${bytesToMb(size)}Mb)`
-    )}   | ${colors.cyan('{bar}')} | {percentage}% || {value}/{total} bytes`,
-    barCompleteChar: '\u2588',
-    barIncompleteChar: '\u2591',
+    )}   | ${colors.cyan("{bar}")} | {percentage}% || {value}/{total} bytes`,
+    barCompleteChar: "\u2588",
+    barIncompleteChar: "\u2591",
     hideCursor: true,
   });
 
@@ -93,14 +93,14 @@ export default async function sortFiles(
       break;
     }
 
-    const strToWrite = String(min) + '\n';
+    const strToWrite = String(min) + "\n";
     chunkSize += Buffer.byteLength(strToWrite);
 
     if (chunkSize > ws.writableHighWaterMark) {
       await writeToFile(ws, output);
       bar.update(ws.bytesWritten);
       chunkSize = 0;
-      output = '';
+      output = "";
     }
 
     output += strToWrite;
@@ -115,6 +115,6 @@ export default async function sortFiles(
   }
 
   bar.stop();
-  
+
   return fsPromises.rm(folder, { recursive: true });
 }
