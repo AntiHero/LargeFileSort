@@ -17,9 +17,9 @@ generateFile()
     return filePath;
   }, failure)
   .then(splitFile)
-  .then((folder) => {
+  .then((folderPath) => {
     success();
-    return folder;
+    return folderPath;
   }, failure)
   .then(sortFiles)
   .then(success, failure)
