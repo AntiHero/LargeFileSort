@@ -115,6 +115,7 @@ export default async function sortFiles(
   }
 
   bar.stop();
+  ws.close();
 
   return fsPromises.rm(folder, { recursive: true });
 }
